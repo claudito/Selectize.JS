@@ -7,15 +7,21 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Selectize JS</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<link rel="stylesheet" href="http://selectize.github.io/selectize.js/css/selectize.default.css" >
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+
+<script src="http://selectize.github.io/selectize.js/js/selectize.js"></script>
+
+<link href="https://fonts.googleapis.com/css?family=Baloo+Bhaina" rel="stylesheet">
+
+<style>
+body{font-family: 'Baloo Bhaina', cursive;}
+</style>
 
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-
-<script src="librerias/Selectize.js/dist/js/standalone/selectize.min.js"></script>
-
-<script src="librerias/Selectize.js/index/js/index.js"></script>
 </head>
 <body>
 	
@@ -25,36 +31,30 @@
 		 <h1>Búsqueda de Alumnos con Selectize.JS</h1>
 		 <hr>
         
-    <form action="">
+    <form action="consulta.php" method="post">
       
-    <select name="alumnos" id="alumnos" required="">
+    <select id="idalumno" name="alumno[]" multiple class="demo-default"  
+    placeholder="[ SELECCIONAR ALUMNO ]" required="">
         <option value="">[SELECCIONAR ALUMNO]</option>
         <?php 
          $query   = "SELECT * FROM alumno ORDER BY nombres";
          $result  = $db->query($query);
          while ($fila = mysqli_fetch_object($result)) {
-          echo "<option value='$fila->codigo'>$fila->nombres $fila->apellidos</option>";
+          echo "<option value='$fila->nombres $fila->apellidos'>$fila->nombres $fila->apellidos</option>";
          }
 
          ?>
     </select>
-   <script>
-    $('#alumnos').selectize();
-   </script>
-
-   <button class="btn btn-primary">Consultar ID</button>
+ <script >
+$('#idalumno').selectize({
+maxItems: 3
+});
+</script>
+   <button class="btn btn-primary">Consultar</button>
 
     </form>
 
-<h2>Atención</h2>
-<hr>
-<ul>
-<li>La variable <strong>url</strong> debe contener la ruta de su proyecto.</li>
-<li>EL archivo lo encontramos en <strong>librerias/Selectize.js/index/js/index.js</strong></li>
-</ul>
 
-
-<img src="img/img01.JPG" alt="atencion" class="img-responsive img-thumbnail">
 
 		</div>
 	</div>
